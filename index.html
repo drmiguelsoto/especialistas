@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
+<title>Especialistas · Dr. Miguel Soto</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  --negro:#030707; --taupe:#A19487; --crema:#F4F2F1; --blanco:#fff;
+  --tinta:#1d1f1f; --suave:#6f6a65; --linea:#e2ddd8; --fondo:#F4F2F1; --tarjeta:#fff;
+  --ok:#3d7a57; --okf:#e5f1ea; --alerta:#a3561c; --alertaf:#fbefe4; --mal:#a33a2c; --malf:#f8e6e3;
+  --sombra:0 1px 2px rgba(3,7,7,.05),0 6px 24px rgba(3,7,7,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--fondo);color:var(--tinta);font:400 15px/1.5 Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;margin:0;letter-spacing:.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+.oculto{display:none!important}
+
+/* Portada */
+#portada{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--negro);color:var(--crema)}
+.portada-caja{text-align:center;max-width:360px}
+.mono{width:64px;height:64px;border:1px solid var(--taupe);border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;
+  font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.06em;color:var(--crema)}
+#portada h1{font-size:38px;font-weight:500}
+#portada p{color:var(--taupe);margin:8px 0 28px;font-weight:300;letter-spacing:.04em}
+#gbtn{display:flex;justify-content:center;min-height:44px}
+#errLogin{margin-top:18px;color:#f0c7bf;font-size:14px}
+
+/* Estructura */
+header.barra{position:sticky;top:0;z-index:10;background:var(--negro);color:var(--crema)}
+.barra-in{max-width:1080px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.barra .mono{width:34px;height:34px;font-size:14px;margin:0}
+.barra h1{font-size:22px;font-weight:500}
+.barra .quien{margin-left:auto;font-size:13px;color:var(--taupe);text-align:right}
+.barra .quien button{background:none;border:0;color:var(--crema);text-decoration:underline;cursor:pointer;padding:0;font-size:13px}
+nav.pestanas{max-width:1080px;margin:0 auto;padding:0 8px;display:flex;gap:2px;overflow-x:auto}
+nav.pestanas button{background:none;border:0;border-bottom:2px solid transparent;color:var(--taupe);padding:10px 12px;cursor:pointer;
+  font-size:14px;letter-spacing:.04em;white-space:nowrap}
+nav.pestanas button.on{color:var(--crema);border-color:var(--taupe)}
+nav.pestanas .cuenta{display:inline-block;min-width:18px;padding:0 5px;margin-left:5px;border-radius:9px;background:var(--alerta);
+  color:#fff;font-size:11px;line-height:18px;text-align:center}
+main{max-width:1080px;margin:0 auto;padding:20px 16px 80px}
+.seccion-tit{display:flex;align-items:baseline;gap:12px;margin:6px 0 14px;flex-wrap:wrap}
+.seccion-tit h2{font-size:28px}
+.seccion-tit .sub{color:var(--suave);font-size:14px}
+.seccion-tit .der{margin-left:auto}
+
+.tarjeta{background:var(--tarjeta);border:1px solid var(--linea);border-radius:14px;padding:18px;box-shadow:var(--sombra)}
+.paso{margin-bottom:16px}
+.paso-num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--negro);color:var(--crema);
+  font-size:12px;margin-right:8px;vertical-align:1px}
+.paso h3{font-size:21px;margin-bottom:12px}
+
+label.campo{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--suave);margin:0 0 4px}
+input[type=text],input[type=tel],input[type=email],input[type=date],input[type=search],input[type=url],select,textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--linea);border-radius:10px;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--taupe);box-shadow:0 0 0 3px rgba(161,148,135,.18)}
+textarea{min-height:76px;resize:vertical}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 14px}
+.rejilla .ancho{grid-column:1/-1}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--negro);background:var(--negro);color:var(--crema);
+  padding:10px 16px;border-radius:999px;cursor:pointer;font-size:14px;letter-spacing:.03em}
+.btn:hover{opacity:.9}
+.btn.sec{background:#fff;color:var(--negro);border-color:var(--linea)}
+.btn.wa{background:#1f7a4d;border-color:#1f7a4d;color:#fff}
+.btn.chico{padding:6px 12px;font-size:13px}
+.btn[disabled]{opacity:.45;cursor:default}
+.acciones{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+/* Paciente */
+.resultados{margin-top:8px;border:1px solid var(--linea);border-radius:10px;overflow:hidden;max-height:300px;overflow-y:auto;background:#fff}
+.resultados button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--linea);background:#fff;padding:10px 12px;cursor:pointer}
+.resultados button:hover{background:var(--crema)}
+.resultados small{color:var(--suave)}
+.elegido{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:var(--crema)}
+.elegido .n{font-weight:500}
+.elegido small{color:var(--suave)}
+.elegido button{margin-left:auto}
+.nota{font-size:13px;color:var(--suave);margin-top:6px}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px}
+.chip.on{background:var(--negro);border-color:var(--negro);color:var(--crema)}
+.chip .c{color:var(--taupe);margin-left:4px}
+
+/* Especialistas */
+.lista-esp{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:14px}
+.esp{border:1px solid var(--linea);border-radius:12px;padding:14px;background:#fff;cursor:pointer;position:relative;transition:border-color .15s}
+.esp:hover{border-color:var(--taupe)}
+.esp.on{border-color:var(--negro);box-shadow:0 0 0 2px var(--negro) inset}
+.esp .nom{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;line-height:1.2}
+.esp .esp-de{color:var(--taupe);font-size:13px;letter-spacing:.03em;margin-bottom:8px}
+.esp .dato{font-size:13px;color:var(--suave)}
+.esp .met{display:flex;gap:12px;margin-top:10px;font-size:12px;color:var(--suave);flex-wrap:wrap}
+.esp .met b{color:var(--tinta);font-weight:500}
+.sello{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;letter-spacing:.04em}
+.sello.ok{background:var(--okf);color:var(--ok)}
+.sello.alerta{background:var(--alertaf);color:var(--alerta)}
+.sello.mal{background:var(--malf);color:var(--mal)}
+.sello.gris{background:#efeceb;color:var(--suave)}
+.esp .editar{position:absolute;top:10px;right:10px}
+
+.interruptor{display:flex;gap:6px}
+.interruptor button{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;font-size:14px}
+.interruptor button.on{background:var(--negro);color:var(--crema);border-color:var(--negro)}
+
+.previa{white-space:pre-wrap;background:#e9f5ee;border:1px solid #cfe6d8;border-radius:12px;padding:14px;font-size:14px;margin-top:10px}
+
+/* Seguimiento */
+.alertas{display:grid;gap:10px;margin-bottom:18px}
+.aviso{border-radius:12px;padding:12px 14px;border:1px solid}
+.aviso.mal{background:var(--malf);border-color:#ecc8c1;color:#5e2219}
+.aviso.alerta{background:var(--alertaf);border-color:#efd6bf;color:#5a330f}
+.aviso b{font-weight:600}
+.filtros{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.filtros input{max-width:280px}
+.filtros select{max-width:200px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--linea);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linea);vertical-align:top;font-size:14px}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);font-weight:500;background:#faf8f7}
+tr:last-child td{border-bottom:0}
+td small{color:var(--suave)}
+.estrellas{display:inline-flex;gap:2px}
+.estrellas button{border:0;background:none;cursor:pointer;font-size:18px;line-height:1;padding:0 1px;color:#d9d2cc}
+.estrellas button.on{color:var(--taupe)}
+.tabla-envoltura{overflow-x:auto}
+.vacio{padding:28px;text-align:center;color:var(--suave);background:#fff;border:1px dashed var(--linea);border-radius:12px}
+
+/* Detalle referencia (móvil) */
+.ref-card{display:none}
+
+/* Modal */
+.velo{position:fixed;inset:0;background:rgba(3,7,7,.45);display:grid;place-items:center;z-index:40;padding:16px}
+.modal{background:#fff;border-radius:16px;max-width:760px;width:100%;max-height:92vh;overflow:auto;padding:22px}
+.modal h2{font-size:26px;margin-bottom:4px}
+.modal .sub{color:var(--suave);font-size:14px;margin-bottom:16px}
+.grupo-tit{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe);margin:18px 0 8px;border-top:1px solid var(--linea);padding-top:14px}
+
+#aviso{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--negro);color:var(--crema);padding:11px 18px;
+  border-radius:999px;font-size:14px;z-index:60;box-shadow:var(--sombra);max-width:92vw}
+#aviso.error{background:var(--mal)}
+.cargando{color:var(--suave);font-size:14px;padding:10px 0}
+
+@media (max-width:700px){
+  .barra .quien span{display:none}
+  .tabla-envoltura table{display:none}
+  .ref-card{display:block;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px;margin-bottom:10px}
+  .ref-card .fila{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .ref-card select,.ref-card input{flex:1;min-width:140px}
+  .seccion-tit h2{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<section id="portada">
+  <div class="portada-caja">
+    <div class="mono">MS</div>
+    <h1>Especialistas</h1>
+    <p>Padrón de especialistas que recomienda el Dr. Miguel Soto</p>
+    <div id="gbtn"></div>
+    <div id="errLogin" class="oculto"></div>
+  </div>
+</section>
+
+<div id="app" class="oculto">
+  <header class="barra">
+    <div class="barra-in">
+      <div class="mono">MS</div>
+      <h1>Especialistas</h1>
+      <div class="quien"><span id="quien"></span><br><button onclick="salir()">Salir</button></div>
+    </div>
+    <nav class="pestanas">
+      <button data-p="recomendar" class="on">Recomendar</button>
+      <button data-p="seguimiento">Seguimiento<span id="cuentaPend" class="cuenta oculto"></span></button>
+      <button data-p="padron">Padrón</button>
+      <button data-p="recibidas">Pacientes recibidos</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= RECOMENDAR ======================= -->
+    <section id="p-recomendar">
+      <div class="seccion-tit"><h2>Recomendar especialista</h2><span class="sub">Busque a la paciente, elija al especialista y envíele los datos por WhatsApp.</span></div>
+
+      <div class="tarjeta paso">
+        <h3><span class="paso-num">1</span>Paciente</h3>
+        <div id="recPacBusca">
+          <input type="search" id="recPacQ" placeholder="Nombre, teléfono o número de paciente" autocomplete="off">
+          <div id="recPacRes" class="resultados oculto"></div>
+          <div class="nota">Busca en la Base de Datos de pacientes. Escriba al menos 3 letras.</div>
+        </div>
+        <div id="recPacSel" class="elegido oculto"></div>
+      </div>
+
+      <div class="tarjeta paso">
+        <h3><span class="paso-num">2</span>Especialista</h3>
+        <div id="recChips" class="chips"></div>
+        <div id="recLista" class="lista-esp"></div>
+      </div>
+
+      <div class="tarjeta paso">
+        <h3><span class="paso-num">3</span>Motivo</h3>
+        <div class="rejilla">
+          <div><label class="campo">Motivo</label><select id="recMotivo"></select></div>
+          <div>
+            <label class="campo">¿Es requisito para operar?</label>
+            <div class="interruptor" id="recPreop"><button data-v="Sí">Sí</button><button data-v="No" class="on">No</button></div>
+          </div>
+          <div id="recFechaCx" class="oculto"><label class="campo">Fecha de cirugía programada</label><input type="date" id="recFechaCxIn"></div>
+          <div class="ancho"><label class="campo">Notas internas (no van en el mensaje)</label><textarea id="recNotas" placeholder="Ej. HbA1c elevada en laboratorios; pedir control antes de Body360"></textarea></div>
+        </div>
+        <label class="campo" style="margin-top:14px">Mensaje para la paciente</label>
+        <div id="recPrevia" class="previa">Elija paciente y especialista para ver el mensaje.</div>
+        <div class="acciones">
+          <button class="btn wa" id="recEnviar" disabled>Registrar y abrir WhatsApp</button>
+          <button class="btn sec" id="recCopiar" disabled>Registrar y copiar mensaje</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= SEGUIMIENTO ======================= -->
+    <section id="p-seguimiento" class="oculto">
+      <div class="seccion-tit"><h2>Seguimiento</h2><span class="sub">Lo pendiente primero. Las valoraciones preoperatorias se vigilan contra la fecha de cirugía.</span>
+        <button class="btn sec chico der" onclick="cargaReferencias(true)">Actualizar</button></div>
+      <div id="segAlertas" class="alertas"></div>
+      <div class="filtros">
+        <input type="search" id="segQ" placeholder="Buscar paciente o especialista">
+        <select id="segEstado"><option value="abiertas">Abiertas</option><option value="">Todas</option></select>
+        <label style="font-size:14px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="segPreop"> Solo preoperatorias</label>
+      </div>
+      <div id="segLista"></div>
+    </section>
+
+    <!-- ======================= PADRÓN ======================= -->
+    <section id="p-padron" class="oculto">
+      <div class="seccion-tit"><h2>Padrón</h2><span class="sub">Solo especialistas con cédula verificada en el Registro Nacional de Profesionistas.</span>
+        <button class="btn der" onclick="abreEspecialista()">+ Nuevo especialista</button></div>
+      <div class="filtros">
+        <input type="search" id="padQ" placeholder="Buscar nombre, especialidad o zona">
+        <label style="font-size:14px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="padBajas"> Mostrar dados de baja</label>
+      </div>
+      <div id="padChips" class="chips"></div>
+      <div id="padLista" class="lista-esp"></div>
+    </section>
+
+    <!-- ======================= RECIBIDAS ======================= -->
+    <section id="p-recibidas" class="oculto">
+      <div class="seccion-tit"><h2>Pacientes recibidos</h2><span class="sub">Pacientes que nos mandan los especialistas del padrón. Así se ve si la relación va de ida y vuelta.</span></div>
+      <div class="tarjeta paso">
+        <h3>Registrar paciente recibido</h3>
+        <div class="rejilla">
+          <div><label class="campo">Especialista que la refirió</label><select id="rcbEsp"></select></div>
+          <div class="ancho">
+            <label class="campo">Paciente</label>
+            <div id="rcbPacBusca">
+              <input type="search" id="rcbPacQ" placeholder="Buscar en la Base de Datos, o escribir el nombre si aún no tiene alta" autocomplete="off">
+              <div id="rcbPacRes" class="resultados oculto"></div>
+            </div>
+            <div id="rcbPacSel" class="elegido oculto"></div>
+          </div>
+          <div><label class="campo">Teléfono</label><input type="tel" id="rcbTel" placeholder="10 dígitos"></div>
+          <div><label class="campo">Interés</label><input type="text" id="rcbInteres" placeholder="Ej. Deep Plane, Body360"></div>
+          <div class="ancho"><label class="campo">Notas</label><textarea id="rcbNotas"></textarea></div>
+        </div>
+        <div class="acciones"><button class="btn" id="rcbGuardar">Registrar</button></div>
+      </div>
+
+      <h3 style="font-size:22px;margin:22px 0 10px">Balance por especialista</h3>
+      <div id="rcbBalance" class="tabla-envoltura"></div>
+      <h3 style="font-size:22px;margin:22px 0 10px">Registro</h3>
+      <div id="rcbLista" class="tabla-envoltura"></div>
+    </section>
+  </main>
+</div>
+
+<!-- ======================= MODAL ESPECIALISTA ======================= -->
+<div id="velo" class="velo oculto" onclick="if(event.target===this)cierraModal()">
+  <div class="modal">
+    <h2 id="mTit">Nuevo especialista</h2>
+    <div class="sub">Lo marcado con * es obligatorio. Verifique la cédula en
+      <a href="https://www.cedulaprofesional.sep.gob.mx/" target="_blank" rel="noopener">cedulaprofesional.sep.gob.mx</a> antes de marcarla como verificada.</div>
+    <div class="rejilla">
+      <div><label class="campo">Tratamiento</label><select id="fTratamiento"><option>Dr.</option><option>Dra.</option><option>Lic.</option><option>Mtra.</option><option>Mtro.</option><option value="">—</option></select></div>
+      <div><label class="campo">Nombre completo *</label><input type="text" id="fNombre"></div>
+      <div><label class="campo">Especialidad *</label><select id="fEspecialidad"></select></div>
+      <div id="fEspOtraCaja" class="oculto"><label class="campo">¿Cuál?</label><input type="text" id="fEspOtra"></div>
+      <div><label class="campo">Subespecialidad / enfoque</label><input type="text" id="fSubespecialidad"></div>
+    </div>
+    <div class="grupo-tit">Credenciales</div>
+    <div class="rejilla">
+      <div><label class="campo">Cédula profesional</label><input type="text" id="fCedula_Profesional" inputmode="numeric"></div>
+      <div><label class="campo">Cédula de especialidad</label><input type="text" id="fCedula_Especialidad" inputmode="numeric"></div>
+      <div><label class="campo">Consejo</label><input type="text" id="fConsejo" placeholder="Ej. Consejo Mexicano de Medicina Interna"></div>
+      <div><label class="campo">¿Cédula verificada?</label><select id="fCedula_Verificada"><option>No</option><option>Sí</option></select></div>
+    </div>
+    <div class="grupo-tit">Dónde y cómo</div>
+    <div class="rejilla">
+      <div><label class="campo">Sede (hospital o consultorio)</label><input type="text" id="fSede"></div>
+      <div><label class="campo">Zona</label><input type="text" id="fZona" placeholder="Ej. Coyoacán, Pedregal, Polanco"></div>
+      <div class="ancho"><label class="campo">Dirección</label><input type="text" id="fDireccion"></div>
+      <div><label class="campo">Teléfono</label><input type="tel" id="fTelefono"></div>
+      <div><label class="campo">WhatsApp</label><input type="tel" id="fWhatsApp"></div>
+      <div><label class="campo">Correo</label><input type="email" id="fCorreo"></div>
+      <div><label class="campo">Sitio web / Doctoralia</label><input type="url" id="fWeb"></div>
+      <div><label class="campo">Honorario de consulta (aprox.)</label><input type="text" id="fHonorario_Consulta" placeholder="Ej. $1,500"></div>
+      <div><label class="campo">Seguros que acepta</label><input type="text" id="fSeguros" placeholder="Ej. GNP, AXA · Ninguno"></div>
+      <div class="ancho"><label class="campo">Horario</label><input type="text" id="fHorario" placeholder="Ej. Lun a vie 9–14 h"></div>
+    </div>
+    <div class="grupo-tit">Notas</div>
+    <div class="rejilla">
+      <div class="ancho"><label class="campo">Nota para la paciente (sí va en el mensaje)</label><textarea id="fNotas_Paciente" placeholder="Ej. Llevar sus laboratorios recientes y la lista de medicamentos."></textarea></div>
+      <div class="ancho"><label class="campo">Notas internas (solo el equipo)</label><textarea id="fNotas_Internas" placeholder="Ej. Contesta rápido; entrega valoración el mismo día."></textarea></div>
+      <div><label class="campo">Estado en el padrón</label><select id="fActivo"><option>Sí</option><option value="No">No (dado de baja)</option></select></div>
+    </div>
+    <div class="acciones">
+      <button class="btn" id="mGuardar">Guardar</button>
+      <button class="btn sec" onclick="cierraModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<div id="aviso" class="oculto"></div>
+
+<script>
+/* ==================================================================
+   CONFIGURACIÓN
+   ================================================================== */
+var CLIENT_ID = '634352012698-b47t3ed3tvd4d1g7l30l68bd6e5s0ri4.apps.googleusercontent.com';
+var GATEWAY   = '__GATEWAY__';
+var TEL_CONSULTORIO = '55 6223 4133';
+
+var $ = function(id){ return document.getElementById(id); };
+var CRED = null, CAT = { Especialidad: [], Motivo: [], Estado: [] };
+var ESP = [], REFS = [], RCB = [];
+var REC = { paciente: null, esp: null, especialidad: '', preop: 'No' };
+var RC = { paciente: null };
+
+/* ==================================================================
+   IDENTIDAD
+   ================================================================== */
+function onCredential(r){
+  CRED = r.credential;
+  try { sessionStorage.setItem('cred', CRED); } catch (e) {}
+  if ($('app').classList.contains('oculto')) entra();
+}
+function pintaBotonGoogle(){
+  if (!window.google || !google.accounts || !google.accounts.id) return false;
+  google.accounts.id.initialize({ client_id: CLIENT_ID, callback: onCredential, auto_select: true, cancel_on_tap_outside: false });
+  google.accounts.id.renderButton($('gbtn'), { theme: 'filled_black', size: 'large', text: 'signin_with', locale: 'es', width: 280 });
+  google.accounts.id.prompt();
+  return true;
+}
+function esperaGoogle(){
+  if (pintaBotonGoogle()) return;
+  esperaGoogle.n = (esperaGoogle.n || 0) + 1;
+  if (esperaGoogle.n > 40){ muestraErrorLogin('No cargó el acceso de Google. Revise su conexión y recargue la página.'); return; }
+  setTimeout(esperaGoogle, 250);
+}
+function muestraErrorLogin(m){ $('errLogin').textContent = m; $('errLogin').classList.remove('oculto'); }
+function salir(){
+  CRED = null;
+  try { sessionStorage.removeItem('cred'); } catch (e) {}
+  if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();
+  location.reload();
+}
+function sesionCaida(m){
+  CRED = null;
+  try { sessionStorage.removeItem('cred'); } catch (e) {}
+  $('app').classList.add('oculto'); $('portada').classList.remove('oculto');
+  muestraErrorLogin(m); esperaGoogle();
+}
+
+/* Transporte: cuerpo JSON sin encabezados (petición simple, sin preflight)
+   y credentials:'omit' (si no, con varias cuentas de Google abiertas Apps
+   Script redirige a /u/N/ y responde 404). */
+function pide(accion, datos, reintento){
+  var cuerpo = { accion: accion, credential: CRED };
+  if (datos) for (var k in datos) if (datos.hasOwnProperty(k)) cuerpo[k] = datos[k];
+  return fetch(GATEWAY, { method: 'POST', body: JSON.stringify(cuerpo), credentials: 'omit' })
+    .then(function(r){ return r.text(); })
+    .then(function(t){
+      var d;
+      try { d = JSON.parse(t); } catch (e) { throw new Error('El servidor contestó algo que no entiendo.'); }
+      if (d && d.nota && /solo responde por POST/i.test(d.nota) && !reintento)
+        return new Promise(function(s){ setTimeout(s, 700); }).then(function(){ return pide(accion, datos, true); });
+      if (d && d.error){
+        if (/sesión|identificarse|expiró|Credencial/i.test(d.error)) sesionCaida(d.error);
+        throw new Error(d.error);
+      }
+      return d;
+    });
+}
+
+function entra(){
+  pide('sesion').then(function(d){
+    CAT = d.catalogos;
+    $('quien').textContent = d.nombre;
+    $('portada').classList.add('oculto'); $('app').classList.remove('oculto');
+    pintaCatalogos();
+    return Promise.all([cargaEspecialistas(), cargaReferencias(), cargaRecibidas()]);
+  }).catch(function(e){
+    if (!$('app').classList.contains('oculto')) aviso(e.message, true);
+    else muestraErrorLogin(e.message);
+  });
+}
+
+/* ==================================================================
+   UTILERÍAS
+   ================================================================== */
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+function sinAcento(s){ return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
+function titulo(s){
+  return String(s || '').toLowerCase().replace(/(^|[\s\-'])([a-zñáéíóúü])/g, function(m, a, b){ return a + b.toUpperCase(); })
+    .replace(/\b(De|Del|La|Las|Los|Y)\b/g, function(m){ return m.toLowerCase(); }).replace(/^./, function(c){ return c.toUpperCase(); });
+}
+function telBonito(t){ t = String(t || '').replace(/\D/g, '').slice(-10); return t.length === 10 ? t.slice(0,2) + ' ' + t.slice(2,6) + ' ' + t.slice(6) : t; }
+function fechaCorta(iso){
+  if (!iso) return '';
+  var d = new Date(String(iso).length <= 10 ? iso + 'T12:00:00' : iso);
+  if (isNaN(d)) return iso;
+  return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function diasHasta(iso){
+  if (!iso) return null;
+  var hoy = new Date(); hoy.setHours(0,0,0,0);
+  var d = new Date(iso + 'T00:00:00');
+  return isNaN(d) ? null : Math.round((d - hoy) / 86400000);
+}
+function nombreEsp(e){ return ((e.Tratamiento ? e.Tratamiento + ' ' : '') + e.Nombre).trim(); }
+function aviso(m, error){
+  var a = $('aviso'); a.textContent = m; a.classList.toggle('error', !!error); a.classList.remove('oculto');
+  clearTimeout(aviso.t); aviso.t = setTimeout(function(){ a.classList.add('oculto'); }, error ? 6000 : 3000);
+}
+function opciones(sel, lista, vacia){
+  sel.innerHTML = (vacia ? '<option value="">' + esc(vacia) + '</option>' : '') +
+    lista.map(function(v){ return '<option>' + esc(v) + '</option>'; }).join('');
+}
+function debounce(fn, ms){ var t; return function(){ var a = arguments, s = this; clearTimeout(t); t = setTimeout(function(){ fn.apply(s, a); }, ms); }; }
+
+/* ==================================================================
+   PESTAÑAS
+   ================================================================== */
+document.querySelectorAll('nav.pestanas button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('nav.pestanas button').forEach(function(x){ x.classList.toggle('on', x === b); });
+    ['recomendar','seguimiento','padron','recibidas'].forEach(function(p){ $('p-' + p).classList.toggle('oculto', p !== b.dataset.p); });
+    window.scrollTo(0, 0);
+  });
+});
+
+function pintaCatalogos(){
+  opciones($('recMotivo'), CAT.Motivo || []);
+  opciones($('fEspecialidad'), (CAT.Especialidad || []).concat(['+ Agregar otra…']));
+}
+
+/* ==================================================================
+   BUSCADOR DE PACIENTES (compartido)
+   ================================================================== */
+function buscadorPaciente(inp, res, alElegir){
+  var ultima = '';
+  inp.addEventListener('input', debounce(function(){
+    var q = inp.value.trim();
+    if (q.length < 3){ res.classList.add('oculto'); return; }
+    ultima = q;
+    res.classList.remove('oculto'); res.innerHTML = '<div class="cargando" style="padding:10px 12px">Buscando…</div>';
+    pide('buscarPaciente', { q: q }).then(function(d){
+      if (q !== ultima) return;
+      if (!d.pacientes.length){ res.innerHTML = '<div class="cargando" style="padding:10px 12px">Sin coincidencias en la Base de Datos.</div>'; return; }
+      res.innerHTML = '';
+      d.pacientes.forEach(function(p){
+        var b = document.createElement('button');
+        b.innerHTML = '<div>' + esc(titulo(p.nombre)) + '</div><small>' + (p.idBD ? 'No. ' + esc(p.idBD) + ' · ' : '') + esc(telBonito(p.telefono) || 'sin teléfono') + '</small>';
+        b.onclick = function(){ res.classList.add('oculto'); alElegir(p); };
+        res.appendChild(b);
+      });
+    }).catch(function(e){ res.innerHTML = '<div class="cargando" style="padding:10px 12px">' + esc(e.message) + '</div>'; });
+  }, 350));
+}
+function pintaElegido(caja, buscaCaja, p, alQuitar){
+  caja.innerHTML = '<div><div class="n">' + esc(titulo(p.nombre)) + '</div><small>' + (p.idBD ? 'No. ' + esc(p.idBD) + ' · ' : '') +
+    esc(telBonito(p.telefono) || 'sin teléfono registrado') + '</small></div><button class="btn sec chico">Cambiar</button>';
+  caja.querySelector('button').onclick = alQuitar;
+  caja.classList.remove('oculto'); buscaCaja.classList.add('oculto');
+}
+
+/* ==================================================================
+   RECOMENDAR
+   ================================================================== */
+buscadorPaciente($('recPacQ'), $('recPacRes'), function(p){
+  REC.paciente = p;
+  pintaElegido($('recPacSel'), $('recPacBusca'), p, function(){
+    REC.paciente = null; $('recPacSel').classList.add('oculto'); $('recPacBusca').classList.remove('oculto');
+    $('recPacQ').value = ''; $('recPacQ').focus(); actualizaPrevia();
+  });
+  actualizaPrevia();
+});
+
+document.querySelectorAll('#recPreop button').forEach(function(b){
+  b.onclick = function(){
+    REC.preop = b.dataset.v;
+    document.querySelectorAll('#recPreop button').forEach(function(x){ x.classList.toggle('on', x === b); });
+    $('recFechaCx').classList.toggle('oculto', REC.preop !== 'Sí');
+  };
+});
+$('recMotivo').onchange = function(){
+  if (/preoperatori|antes de cirug/i.test(this.value)) document.querySelector('#recPreop button[data-v="Sí"]').click();
+  actualizaPrevia();
+};
+
+function activos(){ return ESP.filter(function(e){ return e.Activo === 'Sí'; }); }
+
+function pintaChipsRec(){
+  var cuenta = {};
+  activos().forEach(function(e){ cuenta[e.Especialidad] = (cuenta[e.Especialidad] || 0) + 1; });
+  var esps = Object.keys(cuenta).sort(function(a, b){ return a.localeCompare(b, 'es'); });
+  if (!esps.length){
+    $('recChips').innerHTML = '';
+    $('recLista').innerHTML = '<div class="vacio" style="grid-column:1/-1">Aún no hay especialistas en el padrón. Agréguelos en la pestaña <b>Padrón</b>.</div>';
+    return;
+  }
+  if (REC.especialidad && !cuenta[REC.especialidad]) REC.especialidad = '';
+  $('recChips').innerHTML = esps.map(function(s){
+    return '<button class="chip' + (s === REC.especialidad ? ' on' : '') + '" data-s="' + esc(s) + '">' + esc(s) + '<span class="c">' + cuenta[s] + '</span></button>';
+  }).join('');
+  $('recChips').querySelectorAll('.chip').forEach(function(c){
+    c.onclick = function(){ REC.especialidad = c.dataset.s; pintaChipsRec(); };
+  });
+  pintaListaRec();
+}
+
+function ordenEsp(a, b){
+  var ca = a.metricas.calificacion || 0, cb = b.metricas.calificacion || 0;
+  if (cb !== ca) return cb - ca;
+  return b.metricas.enviadas - a.metricas.enviadas || a.Nombre.localeCompare(b.Nombre, 'es');
+}
+
+function tarjetaEsp(e, conEditar){
+  var m = e.metricas;
+  var sello = e.Cedula_Verificada === 'Sí' ? '<span class="sello ok">Cédula verificada</span>' : '<span class="sello alerta">Cédula sin verificar</span>';
+  if (e.Activo !== 'Sí') sello = '<span class="sello gris">Dado de baja</span>';
+  var cal = m.calificacion ? '★ <b>' + m.calificacion + '</b> (' + m.nCalificaciones + ')' : 'Sin calificar';
+  return '<div class="nom">' + esc(nombreEsp(e)) + '</div>' +
+    '<div class="esp-de">' + esc(e.Especialidad) + (e.Subespecialidad ? ' · ' + esc(e.Subespecialidad) : '') + '</div>' +
+    (e.Sede || e.Zona ? '<div class="dato">' + esc([e.Sede, e.Zona].filter(Boolean).join(' · ')) + '</div>' : '') +
+    (e.Honorario_Consulta || e.Seguros ? '<div class="dato">' + esc([e.Honorario_Consulta ? 'Consulta ' + e.Honorario_Consulta : '', e.Seguros ? 'Seguros: ' + e.Seguros : ''].filter(Boolean).join(' · ')) + '</div>' : '') +
+    (e.Notas_Internas ? '<div class="dato" style="margin-top:6px;font-style:italic">' + esc(e.Notas_Internas) + '</div>' : '') +
+    '<div class="met"><span>' + cal + '</span><span>Enviadas <b>' + m.enviadas + '</b></span><span>Acudieron <b>' + m.acudieron + '</b></span><span>Nos mandó <b>' + m.recibidas + '</b></span></div>' +
+    '<div style="margin-top:8px">' + sello + '</div>' +
+    (conEditar ? '<button class="btn sec chico editar">Editar</button>' : '');
+}
+
+function pintaListaRec(){
+  var lista = activos().filter(function(e){ return !REC.especialidad || e.Especialidad === REC.especialidad; }).sort(ordenEsp);
+  if (!REC.especialidad){
+    $('recLista').innerHTML = '<div class="nota" style="grid-column:1/-1">Elija la especialidad que necesita la paciente.</div>';
+    return;
+  }
+  $('recLista').innerHTML = '';
+  lista.forEach(function(e){
+    var d = document.createElement('div');
+    d.className = 'esp' + (REC.esp && REC.esp.Esp_ID === e.Esp_ID ? ' on' : '');
+    d.innerHTML = tarjetaEsp(e, false);
+    d.onclick = function(){ REC.esp = e; pintaListaRec(); actualizaPrevia(); };
+    $('recLista').appendChild(d);
+  });
+}
+
+function mensajePaciente(p, e){
+  var nombre = titulo(String(p.nombre || '').split(/\s+/)[0]);
+  var motivo = $('recMotivo').value;
+  var lineas = [];
+  lineas.push('Hola, ' + nombre + '. Le saluda el equipo del Dr. Miguel Soto.');
+  lineas.push('');
+  lineas.push('Como lo platicó en su consulta, le compartimos los datos del especialista que el Dr. Soto le recomienda' +
+    (motivo && motivo !== 'Otro' ? ' para su ' + motivo.charAt(0).toLowerCase() + motivo.slice(1) : '') + ':');
+  lineas.push('');
+  lineas.push('*' + nombreEsp(e) + '*');
+  lineas.push(e.Especialidad + (e.Subespecialidad ? ' · ' + e.Subespecialidad : ''));
+  if (e.Sede) lineas.push(e.Sede);
+  if (e.Direccion) lineas.push(e.Direccion);
+  var tel = e.WhatsApp || e.Telefono;
+  if (e.Telefono) lineas.push('Teléfono: ' + e.Telefono);
+  if (e.WhatsApp && e.WhatsApp !== e.Telefono) lineas.push('WhatsApp: ' + e.WhatsApp);
+  if (e.Horario) lineas.push('Horario: ' + e.Horario);
+  if (e.Web) lineas.push(e.Web);
+  if (e.Notas_Paciente){ lineas.push(''); lineas.push(e.Notas_Paciente); }
+  lineas.push('');
+  lineas.push('Al agendar, por favor mencione que va de parte del Dr. Miguel Soto.');
+  if (REC.preop === 'Sí')
+    lineas.push('Esta valoración es necesaria antes de su cirugía: cuando la tenga, envíenosla por este medio para integrarla a su expediente.');
+  else
+    lineas.push('Cuando acuda, nos dará gusto saber cómo le fue.');
+  lineas.push('');
+  lineas.push('Para cualquier duda, estamos para servirle al ' + TEL_CONSULTORIO + '.');
+  return lineas.join('\n');
+}
+
+function actualizaPrevia(){
+  var listo = REC.paciente && REC.esp;
+  $('recEnviar').disabled = !listo || !REC.paciente.telefono;
+  $('recCopiar').disabled = !listo;
+  $('recPrevia').textContent = listo ? mensajePaciente(REC.paciente, REC.esp) : 'Elija paciente y especialista para ver el mensaje.';
+  if (listo && !REC.paciente.telefono) $('recPrevia').textContent += '\n\n(La paciente no tiene teléfono en la Base de Datos: use "copiar mensaje".)';
+}
+
+function registraReferencia(){
+  if (REC.preop === 'Sí' && !$('recFechaCxIn').value && !confirm('No puso fecha de cirugía. Sin ella no se puede vigilar que la valoración llegue a tiempo. ¿Registrar de todos modos?')) return Promise.reject(null);
+  var p = REC.paciente, e = REC.esp;
+  return pide('crearReferencia', { referencia: {
+    ID_BD: p.idBD, Paciente_ID: p.pacienteId, Paciente: titulo(p.nombre), Telefono: p.telefono,
+    Esp_ID: e.Esp_ID, Motivo: $('recMotivo').value, Requisito_Preop: REC.preop,
+    Fecha_Cirugia: REC.preop === 'Sí' ? $('recFechaCxIn').value : '', Notas: $('recNotas').value
+  }}).then(function(d){
+    aviso('Referencia ' + d.Folio + ' registrada.');
+    cargaReferencias(); cargaEspecialistas();
+    return d;
+  });
+}
+function limpiaRecomendar(){
+  REC.paciente = null; REC.esp = null;
+  $('recPacSel').classList.add('oculto'); $('recPacBusca').classList.remove('oculto'); $('recPacQ').value = '';
+  $('recNotas').value = ''; $('recFechaCxIn').value = '';
+  document.querySelector('#recPreop button[data-v="No"]').click();
+  pintaListaRec(); actualizaPrevia();
+}
+
+$('recEnviar').onclick = function(){
+  var tel = String(REC.paciente.telefono).replace(/\D/g, '').slice(-10);
+  var msg = mensajePaciente(REC.paciente, REC.esp);
+  var ventana = window.open('', '_blank');
+  this.disabled = true;
+  registraReferencia().then(function(){
+    var url = 'https://wa.me/52' + tel + '?text=' + encodeURIComponent(msg);
+    if (ventana) ventana.location.href = url; else location.href = url;
+    limpiaRecomendar();
+  }).catch(function(e){ if (ventana) ventana.close(); if (e) aviso(e.message, true); actualizaPrevia(); });
+};
+$('recCopiar').onclick = function(){
+  var msg = mensajePaciente(REC.paciente, REC.esp);
+  this.disabled = true;
+  registraReferencia().then(function(){
+    return navigator.clipboard.writeText(msg).then(function(){ aviso('Registrada. Mensaje copiado.'); }, function(){ aviso('Registrada. No pude copiar; seleccione el texto a mano.', true); });
+  }).then(limpiaRecomendar).catch(function(e){ if (e) aviso(e.message, true); actualizaPrevia(); });
+};
+
+/* ==================================================================
+   PADRÓN
+   ================================================================== */
+var PAD = { especialidad: '' };
+function cargaEspecialistas(){
+  return pide('listarEspecialistas').then(function(d){
+    ESP = d.especialistas;
+    if (REC.esp) REC.esp = ESP.filter(function(e){ return e.Esp_ID === REC.esp.Esp_ID; })[0] || null;
+    pintaChipsRec(); pintaPadron(); pintaSelectRcb(); pintaBalance();
+  }).catch(function(e){ aviso(e.message, true); });
+}
+function pintaPadron(){
+  var q = sinAcento($('padQ').value), bajas = $('padBajas').checked;
+  var base = ESP.filter(function(e){ return bajas || e.Activo === 'Sí'; });
+  var cuenta = {};
+  base.forEach(function(e){ cuenta[e.Especialidad] = (cuenta[e.Especialidad] || 0) + 1; });
+  $('padChips').innerHTML = ['<button class="chip' + (!PAD.especialidad ? ' on' : '') + '" data-s="">Todas<span class="c">' + base.length + '</span></button>']
+    .concat(Object.keys(cuenta).sort(function(a, b){ return a.localeCompare(b, 'es'); }).map(function(s){
+      return '<button class="chip' + (s === PAD.especialidad ? ' on' : '') + '" data-s="' + esc(s) + '">' + esc(s) + '<span class="c">' + cuenta[s] + '</span></button>';
+    })).join('');
+  $('padChips').querySelectorAll('.chip').forEach(function(c){ c.onclick = function(){ PAD.especialidad = c.dataset.s; pintaPadron(); }; });
+  var lista = base.filter(function(e){
+    if (PAD.especialidad && e.Especialidad !== PAD.especialidad) return false;
+    if (!q) return true;
+    return sinAcento([e.Nombre, e.Especialidad, e.Subespecialidad, e.Zona, e.Sede].join(' ')).indexOf(q) >= 0;
+  }).sort(function(a, b){ return a.Especialidad.localeCompare(b.Especialidad, 'es') || ordenEsp(a, b); });
+  $('padLista').innerHTML = lista.length ? '' : '<div class="vacio" style="grid-column:1/-1">' + (ESP.length ? 'Nada coincide con la búsqueda.' : 'El padrón está vacío. Empiece con <b>+ Nuevo especialista</b>.') + '</div>';
+  lista.forEach(function(e){
+    var d = document.createElement('div');
+    d.className = 'esp';
+    d.innerHTML = tarjetaEsp(e, true);
+    d.onclick = function(){ abreEspecialista(e); };
+    $('padLista').appendChild(d);
+  });
+}
+$('padQ').oninput = debounce(pintaPadron, 200);
+$('padBajas').onchange = pintaPadron;
+
+var CAMPOS_ESP = ['Tratamiento','Nombre','Subespecialidad','Cedula_Profesional','Cedula_Especialidad','Consejo','Cedula_Verificada',
+  'Sede','Zona','Direccion','Telefono','WhatsApp','Correo','Web','Honorario_Consulta','Seguros','Horario','Notas_Paciente','Notas_Internas','Activo'];
+var EDITANDO = null;
+function abreEspecialista(e){
+  EDITANDO = e || null;
+  $('mTit').textContent = e ? 'Editar especialista' : 'Nuevo especialista';
+  CAMPOS_ESP.forEach(function(c){ $('f' + c).value = e ? (e[c] || '') : ''; });
+  if (!e){ $('fTratamiento').value = 'Dr.'; $('fCedula_Verificada').value = 'No'; $('fActivo').value = 'Sí'; }
+  var sel = $('fEspecialidad');
+  if (e && CAT.Especialidad.indexOf(e.Especialidad) < 0){ CAT.Especialidad.push(e.Especialidad); pintaCatalogos(); }
+  sel.value = e ? e.Especialidad : CAT.Especialidad[0];
+  $('fEspOtraCaja').classList.add('oculto'); $('fEspOtra').value = '';
+  $('velo').classList.remove('oculto');
+  setTimeout(function(){ $('fNombre').focus(); }, 50);
+}
+function cierraModal(){ $('velo').classList.add('oculto'); EDITANDO = null; }
+$('fEspecialidad').onchange = function(){ $('fEspOtraCaja').classList.toggle('oculto', this.value !== '+ Agregar otra…'); };
+document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && !$('velo').classList.contains('oculto')) cierraModal(); });
+
+$('mGuardar').onclick = function(){
+  var d = {};
+  CAMPOS_ESP.forEach(function(c){ d[c] = $('f' + c).value.trim(); });
+  d.Especialidad = $('fEspecialidad').value === '+ Agregar otra…' ? $('fEspOtra').value.trim() : $('fEspecialidad').value;
+  if (!d.Nombre) return aviso('Falta el nombre.', true);
+  if (!d.Especialidad) return aviso('Falta la especialidad.', true);
+  if (d.Cedula_Verificada === 'Sí' && !d.Cedula_Profesional) return aviso('Para marcarla verificada, capture la cédula.', true);
+  if (EDITANDO) d.Esp_ID = EDITANDO.Esp_ID;
+  var b = this; b.disabled = true;
+  pide('guardarEspecialista', { especialista: d }).then(function(r){
+    aviso('Guardado (' + r.Esp_ID + ').');
+    if (CAT.Especialidad.indexOf(d.Especialidad) < 0){ CAT.Especialidad.push(d.Especialidad); pintaCatalogos(); }
+    cierraModal(); return cargaEspecialistas();
+  }).catch(function(e){ aviso(e.message, true); }).then(function(){ b.disabled = false; });
+};
+
+/* ==================================================================
+   SEGUIMIENTO
+   ================================================================== */
+var ABIERTOS = { 'Enviada': 1, 'Agendó': 1, 'Acudió': 1 };
+function cargaReferencias(manual){
+  return pide('listarReferencias').then(function(d){
+    REFS = d.referencias; pintaSeguimiento(); pintaBalance();
+    if (manual) aviso('Actualizado.');
+  }).catch(function(e){ aviso(e.message, true); });
+}
+function riesgoPreop(r){
+  if (r.Requisito_Preop !== 'Sí' || !ABIERTOS[r.Estado]) return null;
+  var dias = diasHasta(r.Fecha_Cirugia);
+  if (dias === null) return { nivel: 'alerta', texto: 'Preoperatoria sin fecha de cirugía' };
+  if (dias < 0) return { nivel: 'mal', texto: 'La cirugía era hace ' + (-dias) + ' día(s) y la valoración no está registrada' };
+  if (dias <= 7) return { nivel: 'mal', texto: 'Cirugía en ' + dias + ' día(s) y aún no hay valoración' };
+  if (dias <= 14) return { nivel: 'alerta', texto: 'Cirugía en ' + dias + ' días' };
+  return null;
+}
+function pintaSeguimiento(){
+  var abiertas = REFS.filter(function(r){ return ABIERTOS[r.Estado]; });
+  var riesgos = abiertas.map(function(r){ return { r: r, x: riesgoPreop(r) }; }).filter(function(o){ return o.x; })
+    .sort(function(a, b){ return (diasHasta(a.r.Fecha_Cirugia) || 999) - (diasHasta(b.r.Fecha_Cirugia) || 999); });
+  var c = $('cuentaPend');
+  c.textContent = riesgos.length; c.classList.toggle('oculto', !riesgos.length);
+  $('segAlertas').innerHTML = riesgos.map(function(o){
+    return '<div class="aviso ' + o.x.nivel + '"><b>' + esc(o.r.Paciente) + '</b> → ' + esc(o.r.Especialista) + ' (' + esc(o.r.Especialidad) + ') · ' +
+      esc(o.x.texto) + (o.r.Fecha_Cirugia ? ' · cirugía ' + esc(fechaCorta(o.r.Fecha_Cirugia)) : '') +
+      (o.r.Telefono ? ' · <a href="https://wa.me/52' + esc(o.r.Telefono) + '" target="_blank" rel="noopener">escribirle</a>' : '') + '</div>';
+  }).join('');
+
+  var q = sinAcento($('segQ').value), est = $('segEstado').value, soloPre = $('segPreop').checked;
+  var lista = REFS.filter(function(r){
+    if (est === 'abiertas' && !ABIERTOS[r.Estado]) return false;
+    if (soloPre && r.Requisito_Preop !== 'Sí') return false;
+    if (q && sinAcento([r.Paciente, r.Especialista, r.Especialidad, r.Folio].join(' ')).indexOf(q) < 0) return false;
+    return true;
+  });
+  if (!lista.length){ $('segLista').innerHTML = '<div class="vacio">' + (REFS.length ? 'No hay referencias con este filtro.' : 'Todavía no se ha recomendado a nadie.') + '</div>'; return; }
+
+  var estados = (CAT.Estado || []);
+  function selEstado(r){ return '<select data-f="' + esc(r.Folio) + '" class="selEstado">' + estados.map(function(s){ return '<option' + (s === r.Estado ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select>'; }
+  function estrellas(r){
+    var n = Number(r.Calificacion) || 0, h = '<span class="estrellas" data-f="' + esc(r.Folio) + '">';
+    for (var i = 1; i <= 5; i++) h += '<button data-v="' + i + '" class="' + (i <= n ? 'on' : '') + '" title="' + i + ' de 5">★</button>';
+    return h + '</span>';
+  }
+  function etiquetaPre(r){
+    if (r.Requisito_Preop !== 'Sí') return '';
+    var x = riesgoPreop(r);
+    return '<br><span class="sello ' + (x ? x.nivel : 'gris') + '">Preop' + (r.Fecha_Cirugia ? ' · cx ' + esc(fechaCorta(r.Fecha_Cirugia)) : '') + '</span>';
+  }
+  var filas = lista.map(function(r){
+    return '<tr><td><b>' + esc(r.Paciente) + '</b><br><small>' + esc(r.Folio) + ' · ' + esc(fechaCorta(r.Fecha)) + '</small></td>' +
+      '<td>' + esc(r.Especialista) + '<br><small>' + esc(r.Especialidad) + '</small></td>' +
+      '<td>' + esc(r.Motivo) + etiquetaPre(r) + (r.Notas ? '<br><small>' + esc(r.Notas) + '</small>' : '') + '</td>' +
+      '<td>' + selEstado(r) + '<div style="margin-top:6px"><input type="date" class="fechaCita" data-f="' + esc(r.Folio) + '" value="' + esc(r.Fecha_Cita) + '" title="Fecha de su cita con el especialista"></div></td>' +
+      '<td>' + estrellas(r) + '<div style="margin-top:6px"><input type="text" class="comentario" data-f="' + esc(r.Folio) + '" value="' + esc(r.Comentario) + '" placeholder="¿Cómo le fue?"></div></td></tr>';
+  }).join('');
+  var tarjetas = lista.map(function(r){
+    return '<div class="ref-card"><b>' + esc(r.Paciente) + '</b> → ' + esc(r.Especialista) + '<br><small>' + esc(r.Especialidad) + ' · ' + esc(r.Motivo) + ' · ' + esc(fechaCorta(r.Fecha)) + '</small>' + etiquetaPre(r) +
+      '<div class="fila">' + selEstado(r) + '<input type="date" class="fechaCita" data-f="' + esc(r.Folio) + '" value="' + esc(r.Fecha_Cita) + '"></div>' +
+      '<div class="fila">' + estrellas(r) + '<input type="text" class="comentario" data-f="' + esc(r.Folio) + '" value="' + esc(r.Comentario) + '" placeholder="¿Cómo le fue?"></div></div>';
+  }).join('');
+  $('segLista').innerHTML = '<div class="tabla-envoltura"><table><thead><tr><th>Paciente</th><th>Especialista</th><th>Motivo</th><th>Estado / cita</th><th>Cómo le fue</th></tr></thead><tbody>' +
+    filas + '</tbody></table>' + tarjetas + '</div>';
+
+  $('segLista').querySelectorAll('.selEstado').forEach(function(s){ s.onchange = function(){ cambiaRef(s.dataset.f, { Estado: s.value }); }; });
+  $('segLista').querySelectorAll('.fechaCita').forEach(function(s){ s.onchange = function(){ cambiaRef(s.dataset.f, { Fecha_Cita: s.value }, true); }; });
+  $('segLista').querySelectorAll('.comentario').forEach(function(s){ s.onchange = function(){ cambiaRef(s.dataset.f, { Comentario: s.value }, true); }; });
+  $('segLista').querySelectorAll('.estrellas button').forEach(function(b){
+    b.onclick = function(){ cambiaRef(b.parentNode.dataset.f, { Calificacion: b.dataset.v }); };
+  });
+}
+function cambiaRef(folio, cambios, silencioso){
+  var r = REFS.filter(function(x){ return x.Folio === folio; })[0];
+  if (r) for (var k in cambios) r[k] = cambios[k];
+  if (!silencioso) pintaSeguimiento();
+  pide('actualizarReferencia', { folio: folio, cambios: cambios })
+    .then(function(){ aviso('Guardado.'); if (cambios.Calificacion || cambios.Estado) cargaEspecialistas(); })
+    .catch(function(e){ aviso(e.message, true); cargaReferencias(); });
+}
+$('segQ').oninput = debounce(pintaSeguimiento, 200);
+$('segEstado').onchange = pintaSeguimiento;
+$('segPreop').onchange = pintaSeguimiento;
+
+/* ==================================================================
+   RECIBIDAS
+   ================================================================== */
+function cargaRecibidas(){
+  return pide('listarRecibidas').then(function(d){ RCB = d.recibidas; pintaRecibidas(); pintaBalance(); })
+    .catch(function(e){ aviso(e.message, true); });
+}
+function pintaSelectRcb(){
+  var v = $('rcbEsp').value;
+  $('rcbEsp').innerHTML = '<option value="">Elija…</option>' + ESP.slice().sort(function(a, b){ return a.Nombre.localeCompare(b.Nombre, 'es'); })
+    .map(function(e){ return '<option value="' + esc(e.Esp_ID) + '">' + esc(nombreEsp(e)) + ' · ' + esc(e.Especialidad) + '</option>'; }).join('');
+  $('rcbEsp').value = v;
+}
+buscadorPaciente($('rcbPacQ'), $('rcbPacRes'), function(p){
+  RC.paciente = p;
+  $('rcbTel').value = telBonito(p.telefono);
+  pintaElegido($('rcbPacSel'), $('rcbPacBusca'), p, function(){
+    RC.paciente = null; $('rcbPacSel').classList.add('oculto'); $('rcbPacBusca').classList.remove('oculto'); $('rcbPacQ').value = ''; $('rcbTel').value = '';
+  });
+});
+$('rcbGuardar').onclick = function(){
+  var espId = $('rcbEsp').value;
+  var nombre = RC.paciente ? titulo(RC.paciente.nombre) : $('rcbPacQ').value.trim();
+  if (!espId) return aviso('Elija al especialista que la refirió.', true);
+  if (!nombre) return aviso('Falta la paciente.', true);
+  var b = this; b.disabled = true;
+  pide('registrarRecibida', { recibida: {
+    Esp_ID: espId, Paciente: nombre, ID_BD: RC.paciente ? RC.paciente.idBD : '',
+    Telefono: $('rcbTel').value, Interes: $('rcbInteres').value, Notas: $('rcbNotas').value
+  }}).then(function(d){
+    aviso('Registrada (' + d.Folio + ').');
+    RC.paciente = null; $('rcbPacSel').classList.add('oculto'); $('rcbPacBusca').classList.remove('oculto');
+    ['rcbPacQ','rcbTel','rcbInteres','rcbNotas'].forEach(function(i){ $(i).value = ''; });
+    $('rcbEsp').value = '';
+    return Promise.all([cargaRecibidas(), cargaEspecialistas()]);
+  }).catch(function(e){ aviso(e.message, true); }).then(function(){ b.disabled = false; });
+};
+function pintaRecibidas(){
+  if (!RCB.length){ $('rcbLista').innerHTML = '<div class="vacio">Aún no se registran pacientes recibidos.</div>'; return; }
+  $('rcbLista').innerHTML = '<table><thead><tr><th>Fecha</th><th>Paciente</th><th>La mandó</th><th>Interés</th><th>Notas</th></tr></thead><tbody>' +
+    RCB.map(function(r){
+      return '<tr><td>' + esc(fechaCorta(r.Fecha)) + '<br><small>' + esc(r.Folio) + '</small></td><td>' + esc(r.Paciente) +
+        (r.Telefono ? '<br><small>' + esc(telBonito(r.Telefono)) + '</small>' : '') + '</td><td>' + esc(r.Especialista) + '</td><td>' + esc(r.Interes) + '</td><td>' + esc(r.Notas) + '</td></tr>';
+    }).join('') + '</tbody></table>';
+}
+function pintaBalance(){
+  var filas = ESP.filter(function(e){ return e.metricas.enviadas || e.metricas.recibidas; })
+    .sort(function(a, b){ return (b.metricas.enviadas + b.metricas.recibidas) - (a.metricas.enviadas + a.metricas.recibidas); });
+  if (!filas.length){ $('rcbBalance').innerHTML = '<div class="vacio">El balance aparece en cuanto haya referencias de ida o de vuelta.</div>'; return; }
+  $('rcbBalance').innerHTML = '<table><thead><tr><th>Especialista</th><th>Le mandamos</th><th>Acudieron</th><th>Nos mandó</th><th>Lectura</th></tr></thead><tbody>' +
+    filas.map(function(e){
+      var m = e.metricas, lect;
+      if (!m.recibidas && m.enviadas >= 3) lect = '<span class="sello alerta">Solo de ida</span>';
+      else if (m.recibidas && m.recibidas >= m.enviadas) lect = '<span class="sello ok">Recíproca</span>';
+      else lect = '<span class="sello gris">En curso</span>';
+      return '<tr><td>' + esc(nombreEsp(e)) + '<br><small>' + esc(e.Especialidad) + '</small></td><td>' + m.enviadas + '</td><td>' + m.acudieron + '</td><td>' + m.recibidas + '</td><td>' + lect + '</td></tr>';
+    }).join('') + '</tbody></table>';
+}
+
+/* ==================================================================
+   ARRANQUE
+   ================================================================== */
+(function(){
+  var guardado = null;
+  try { guardado = sessionStorage.getItem('cred'); } catch (e) {}
+  if (guardado){ CRED = guardado; entra(); }
+  esperaGoogle();
+})();
+</script>
+</body>
+</html>
