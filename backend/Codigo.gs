@@ -17,7 +17,7 @@
    Ética: este sistema NO registra comisiones ni pagos por referencia.
    ================================================================== */
 
-var VERSION = '1.0';
+var VERSION = '1.1';
 
 var DEF = {
   CLIENT_ID: '634352012698-b47t3ed3tvd4d1g7l30l68bd6e5s0ri4.apps.googleusercontent.com',
@@ -202,7 +202,8 @@ function columnasBD_(h){
   var c = {
     id: exacta('id'),
     pacienteId: exacta('paciente_id'),
-    nombre: primera(/^nombre( completo| del paciente| paciente)?$/),
+    nombre: exacta('paciente') >= 0 ? exacta('paciente') : primera(/^nombre( completo| del paciente| paciente)?$/),
+    apodo: exacta('le gusta que le digan'),
     apellidos: primera(/^apellidos?$/),
     paterno: primera(/apellido paterno/),
     materno: primera(/apellido materno/),
@@ -211,7 +212,7 @@ function columnasBD_(h){
     correo: primera(/^(correo|email|e-mail)/, /limpio|estado|nota|alterno/),
     correoLimpio: exacta('correo_limpio')
   };
-  if (c.nombre < 0) c.nombre = primera(/nombre/, /medico|asesor|contacto/);
+  if (c.nombre < 0) c.nombre = primera(/nombre|paciente/, /medico|asesor|contacto|_id|revisar/);
   return { enc: enc, c: c };
 }
 
@@ -225,7 +226,7 @@ function buscarPaciente_(q){
   var n = h.getLastRow() - 1;
   if (n < 1) return [];
   function col(i){ return i < 0 ? null : h.getRange(2, i + 1, n, 1).getDisplayValues(); }
-  var cols = { id: col(c.id), pid: col(c.pacienteId), nom: col(c.nombre), ape: col(c.apellidos),
+  var cols = { apo: col(c.apodo), id: col(c.id), pid: col(c.pacienteId), nom: col(c.nombre), ape: col(c.apellidos),
                pat: col(c.paterno), mat: col(c.materno), tn: col(c.telNorm), tel: col(c.tel),
                cor: col(c.correoLimpio >= 0 ? c.correoLimpio : c.correo) };
   function v(k, i){ return cols[k] ? String(cols[k][i][0] || '').trim() : ''; }
@@ -240,7 +241,7 @@ function buscarPaciente_(q){
     var texto = sinAcento_(nombre).toLowerCase();
     var ok = palabras.every(function(p){ return texto.indexOf(p) >= 0; });
     if (!ok && qDig.length >= 4) ok = tel.indexOf(qDig) >= 0 || id === qDig;
-    if (ok) res.push({ idBD: id, pacienteId: v('pid', i), nombre: nombre, telefono: tel.slice(-10), correo: v('cor', i) });
+    if (ok) res.push({ idBD: id, pacienteId: v('pid', i), nombre: nombre, apodo: v('apo', i), telefono: tel.slice(-10), correo: v('cor', i) });
   }
   return res;
 }

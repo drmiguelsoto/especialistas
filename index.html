@@ -575,7 +575,7 @@ function pintaListaRec(){
 }
 
 function mensajePaciente(p, e){
-  var nombre = titulo(String(p.nombre || '').split(/\s+/)[0]);
+  var nombre = p.apodo ? titulo(p.apodo) : titulo(String(p.nombre || '').split(/\s+/)[0]);
   var motivo = $('recMotivo').value;
   var lineas = [];
   lineas.push('Hola, ' + nombre + '. Le saluda el equipo del Dr. Miguel Soto.');
