@@ -14,14 +14,14 @@
 
    Primera vez: correr configurar() desde el editor, autorizar, y
    publicar como App web (Ejecutar como: yo · Acceso: Cualquiera).
-   El acceso real lo decide AUTORIZADOS: sólo las cuentas del Dr. Soto.
+   El acceso real lo decide AUTORIZADOS: sólo miguelitosotomd@gmail.com.
    ================================================================== */
 
 var VERSION = '1.0';
 
 var DEF = {
   CLIENT_ID: '634352012698-b47t3ed3tvd4d1g7l30l68bd6e5s0ri4.apps.googleusercontent.com',
-  AUTORIZADOS: ['miguelitosotomd@gmail.com', 'miguelsotomd@gmail.com'].join(',')
+  AUTORIZADOS: 'miguelitosotomd@gmail.com'   // única cuenta con acceso (decisión del Dr. Soto)
 };
 
 var TIPOS = ['Gasto', 'Ingreso activo', 'Ingreso pasivo'];
@@ -194,9 +194,8 @@ function agregarCatalogo_(cat, valor, u){
    ------------------------------------------------------------------ */
 function configurar(){
   var p = PropertiesService.getScriptProperties();
-  ['CLIENT_ID','AUTORIZADOS'].forEach(function(k){
-    if (!p.getProperty(k)) p.setProperty(k, DEF[k]);
-  });
+  if (!p.getProperty('CLIENT_ID')) p.setProperty('CLIENT_ID', DEF.CLIENT_ID);
+  p.setProperty('AUTORIZADOS', DEF.AUTORIZADOS);   // el código manda: siempre se sobrescribe
   var id = p.getProperty('LIBRO_ID'), libro = null;
   if (id) { try { libro = SpreadsheetApp.openById(id); } catch (e) { libro = null; } }
   if (!libro){
